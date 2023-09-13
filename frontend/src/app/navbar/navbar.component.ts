@@ -13,4 +13,5 @@ export class NavbarComponent {
       width: '40rem',
     });
   }
+
 }

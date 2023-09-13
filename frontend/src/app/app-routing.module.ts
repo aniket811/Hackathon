@@ -7,8 +7,8 @@ const routes: Routes = [
   {path:'',component:LandingsiteComponent,redirectTo:'',pathMatch:'full'},
   {path:'admin',component:AdminComponent,canActivate:[authGuard]},
   {path:'**',component:LandingsiteComponent}
-];
-
+=======
+]
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

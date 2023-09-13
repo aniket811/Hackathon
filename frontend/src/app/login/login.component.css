@@ -1,4 +1,6 @@
+
 /* @import "../../../node_modules/bootstrap/dist/css/bootstrap.css"; */
+@import "../../../node_modules/bootstrap/dist/css/bootstrap.css";
 /******* Bootstrap Theming ********/
 /********** Custom CSS ************/
  h1, h2, h3 {
@@ -182,4 +184,3 @@
 	border-radius: 5px;
 	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   }
- 
