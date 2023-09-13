@@ -2,7 +2,9 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
-import judgesroutes from "./routes/auth.jss";
+import judgesroutes from "./routes/auth.js";
+// import cases from "./controllers/cases.js";
+
 const app = express();
 app.use(express.json({ limit: "30mb", extended: true }));
 
@@ -17,7 +19,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/judges", judgesroutes);
-
+// app.get("/cases", cases);
 const PORT = process.env.PORT || 5000;
 
 const CONNECTION_URL = process.env.CONNECTION_URL;
