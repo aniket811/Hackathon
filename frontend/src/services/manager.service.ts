@@ -7,8 +7,5 @@ import { HttpClient } from '@angular/common/http';
 export class ManagerService {
   public isUserLoggedIn =new BehaviorSubject<boolean>(false);
   public isAdminLoggedIn =new BehaviorSubject<boolean>(false);
-    constructor(private http:HttpClient) { }
-    postLoginData(data:any):{
-
-    }
+   
 }

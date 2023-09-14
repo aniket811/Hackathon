@@ -1,118 +1,29 @@
-
-
 <div class="row  align-items-center justify-content-center mt-0">
     <!-- <div class="col-lg-6  "> -->
-        <div class="rounded p-5 " style="background: rgba(2, 2, 5, 0.7);">
-            
-            <h1 class="text-center  mb-4 " style="color: white;" *ngIf="isLoginActive">Login</h1>
-            <h1 class="text-center  mb-4 " style="color: white;" *ngIf="!isLoginActive">Register Judge</h1>
-            <form #Login="ngForm" (ngSubmit)="getUserLoggedIn(Login.value)" method="post" *ngIf="isLoginActive">
-         
-              
-                    <div class="form-group "   >
-                        <label style="color: white;">Enter your Judge ID:</label>
-                        <input type="text" class="form-control " placeholder="Judge ID"
-                        required="required" name="judgeID" ngModel  />
-                    </div>
-                    <br>
-                    <div class="form-group ">
-                        <label style="color: white;">Enter your Password:</label>
-                        <input type="password" class="form-control " placeholder="Password"
-                            required="required" name="password" ngModel/>
-                    </div>
-              
-              
-                <div >
-                    <a (click)="changeFormState()" class="mb-2" style="color: white;">Not Registered? Click Here to Register</a>
-                </div>
-                <div>
-                    <input class="btn btn-primary btn-block border-0 py-3" type="submit" value="Login" />
-                </div>
-            </form>
-            <!-- Register User -->
-            <form #Register="ngForm" (ngSubmit)="getUserRegistered(Register.value)" method="post" *ngIf="!isLoginActive">
-         
-              
-                <div class="form-group "   >
-                    <label style="color: white;">Enter your Name:</label>
-                    <input type="text" class="form-control " placeholder="Judge ID"
-                    required="required" name="judgeName" ngModel  />
-                </div>
-                <br>
-                <div class="form-group ">
-                    <label style="color: white;">Enter your JudgeID:</label>
-                    <input type="password" class="form-control " placeholder="Password"
-                        required="required" name="password" ngModel/>
-                </div>
-                <br>
-                <div class="form-group "   >
-                    <label style="color: white;">Enter your Email:</label>
-                    <input type="text" class="form-control " placeholder="Judge ID"
-                    required="required" name="email" ngModel  />
-                </div>
-            <div class="form-group">
-                <label style="color: white;" >Select Court:</label>
-                <select class="custom-select border-0 px-4" style="height: 47px;" name="selectCourt" ngModel>
-                    <option selected>Select A Court</option>
-                    <option value="District">District Court</option>
-                </select>
+    <div class="rounded p-5 " style="background: rgba(2, 2, 5, 0.7);">
+
+        <h1 class="text-center  mb-4 " style="color: white;">Login</h1>
+
+        <form #Login="ngForm" (ngSubmit)="getUserLoggedIn(Login.value)" method="post">
+
+
+            <div class="form-group ">
+                <label style="color: white;">Enter your Judge ID:</label>
+                <input type="text" class="form-control " placeholder="Judge ID" required="required" name="judgeID"
+                    ngModel />
             </div>
-            <div >
-                <a class="mb-2 " style="color: white;"  (click)="changeFormState()" >Already Registered? Click Here to Login</a>
+            <br>
+            <div class="form-group ">
+                <label style="color: white;">Enter your Password:</label>
+                <input type="password" class="form-control " placeholder="Password" required="required" name="password"
+                    ngModel />
             </div>
+
+
             <div>
-                <input class="btn btn-primary btn-block border-0 py-3" type="submit" value="Login"/>
+                <input class="btn btn-primary btn-block border-0 py-3" type="submit" value="Login" />
             </div>
-            </form>
-        </div>
-    <!-- </div> -->
-</div>
-=======
-<div class="container-fluid py-5">
-    <div class="container py-5">
-        <div class="bg-appointment rounded">
-            <div class="row h-100 align-items-center justify-content-center">
-                <div class="col-lg-6 py-5">
-                    <div class="rounded p-5 my-5" style="background: rgba(55, 55, 63, .7);">
-                        <h1 class="text-center text-white mb-4">Get An Appointment</h1>
-                        <form>
-                            <div class="form-group">
-                                <input type="text" class="form-control border-0 p-4" placeholder="Your Name" required="required" />
-                            </div>
-                            <div class="form-group">
-                                <input type="email" class="form-control border-0 p-4" placeholder="Your Email" required="required" />
-                            </div>
-                            <div class="form-row">
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <div class="date" id="date" data-target-input="nearest">
-                                            <input type="text" class="form-control border-0 p-4 datetimepicker-input" placeholder="Select Date" data-target="#date" data-toggle="datetimepicker"/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <div class="time" id="time" data-target-input="nearest">
-                                            <input type="text" class="form-control border-0 p-4 datetimepicker-input" placeholder="Select Time" data-target="#time" data-toggle="datetimepicker"/>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <select class="custom-select border-0 px-4" style="height: 47px;">
-                                    <option selected>Select A Service</option>
-                                    <option value="1">Service 1</option>
-                                    <option value="2">Service 1</option>
-                                    <option value="3">Service 1</option>
-                                </select>
-                            </div>
-                            <div>
-                                <button class="btn btn-primary btn-block border-0 py-3" type="submit">Get An Appointment</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </form>
     </div>
+    <!-- </div> -->
 </div>
