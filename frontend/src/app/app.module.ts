@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LandingsiteComponent } from './landingsite/landingsite.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -14,7 +12,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AdminComponent } from './admin/admin.component';
 import { authGuard } from 'src/guards/auth.guard';
-
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +22,7 @@ import { authGuard } from 'src/guards/auth.guard';
     LoginComponent,
     RegisterComponent,
     AdminComponent
-,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
