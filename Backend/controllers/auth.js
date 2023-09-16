@@ -15,14 +15,12 @@ export const signup = async (req, res) => {
       name,
       email,
       password: hashedpassword,
+      userType: "judge",
     });
 
     const token = jwt.sign(
       { email: newJudge.email, id: newJudge.judge_id },
-      "test",
-      {
-        expiresin: "1h",
-      }
+      "test"
     );
     res.status(200).json({ result: newJudge, token });
     console.log(token);
@@ -36,7 +34,7 @@ export const login = async (req, res) => {
   try {
     const existinguser = await judges.findOne({ judge_id });
     if (!existinguser) {
-      return res.status(404).json({ message: "Judge not found ..." });
+       return res.status().json({ message: "Judge not found ..." });
     }
     const isPasswordcrt = await bcrypt.compare(password, existinguser.password);
     if (!isPasswordcrt) {
@@ -45,11 +43,11 @@ export const login = async (req, res) => {
 
     const token = jwt.sign(
       { email: judges.email, id: existinguser.judge_id },
-      "test",
-      { expiresIn: "3h" }
+      "test"
     );
-    res.status(200).json({ result: judges, token });
+    console.log('Hit Received');
+    res.status(200).json({  result:existinguser, token });
   } catch (error) {
-    res.status(500).json("Something went worng");
+    res.status(500).json("Something went wrong");
   }
 };
