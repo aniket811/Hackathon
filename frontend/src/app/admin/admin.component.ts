@@ -25,6 +25,7 @@ export class AdminComponent implements OnInit {
   }
   ngOnInit(): void {
     this.cases=this.casesApi.getCasesData();
+    console.log(this.cases);
     
-  }
+  } 
 }
