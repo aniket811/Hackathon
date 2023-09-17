@@ -25,13 +25,30 @@
                     </div> -->
                     <a  class="nav-item nav-link">Contact</a>
                 </div>
-                <div class="ml-auto">
+                <div class="ml-auto" >
                     <a class="btn"  
+                    *ngIf="getLoginState()"
                     (click)="getUserLoggedIn()"
                     >Login</a>
    
 
+                    <a class="btn"  
+                   *ngIf="isAdminLoggedIn" 
+                   (click)="getAdminLoggedOut()"
+                    >Hello Admin</a>
+   
+                    <a class="btn"  
+                   *ngIf="isClerkLoggedIn" 
+                   (click)="getClerkLoggedOut()"
+                    >Hello Clerk</a>
+   
+                    <a class="btn"  
+                   *ngIf="isUserLoggedIn" 
+                   (click)="getUserLoggedOut()"
+                    >Hello User</a>
+   
                 </div>
+
             </div>
         </nav>
     </div>
