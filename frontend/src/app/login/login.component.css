@@ -184,3 +184,8 @@
 	border-radius: 5px;
 	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   }
+  .form-control:focus{
+	  border-color: #b49c73;
+	  outline: 0;
+	  box-shadow: 0 0 0 0.2rem rgba(180, 156, 115, 0.25);
+  }
