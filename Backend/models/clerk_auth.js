@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const judgeSchema = mongoose.Schema({
+const clerkSchema = mongoose.Schema({
   judge_id: { type: String, required: true },
   name: { type: String, required: true },
   email: { type: String, required: true },
@@ -8,4 +8,4 @@ const judgeSchema = mongoose.Schema({
   userType: { type: String, required: true },
 });
 
-export default mongoose.model("Judges", judgeSchema);
+export default mongoose.model("clerk", clerkSchema);
