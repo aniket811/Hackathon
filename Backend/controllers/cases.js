@@ -1,25 +1,92 @@
 import cases from "../models/cases.js";
+import moment from "moment";
 
-function getDateDifferenceFromDB(dbDate) {
-  // Convert the database date string to a JavaScript Date object
-  const dbDateObj = new Date(dbDate);
+export const getAllCases = async (req, res) => {
+  try {
+    const casesList = await cases.find();
+    res.status(200).json(casesList);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
 
-  // Get today's date
-  const today = new Date();
+export const sortAllcases = async (req, res) => {
+  try {
+    const Caseid = 4;
+    const filter = { Caseid: Caseid };
+    // const update = { $set: { Severity: "Very High" } };
+    const casesList = await cases.find();
 
-  // Calculate the difference in milliseconds
-  const timeDifference = today - dbDateObj;
+    for (let a = 0; a <= casesList.length; a++) {
+      const item = casesList[a];
 
-  // Calculate the difference in months and years
-  const monthsDifference = Math.floor(
-    timeDifference / (1000 * 60 * 60 * 24 * 30)
-  );
-  const yearsDifference = Math.floor(monthsDifference / 12);
+      if (item.LawType == "Criminal") {
+        console.log(item);
+        if (yearsFromGivenDate(item.Casefilingdate) >= 4) {
+          const result = await cases.updateMany(
+            filter,
+            { $set: { Severity: "Very High" } },
+            {
+              upsert: true,
+              returnOriginal: false,
+            }
+          );
+          console.log(item);
+          // res.status(200).json(result);
+        } else if (
+          yearsFromGivenDate(item.Casefilingdate) >= 2 ||
+          yearsFromGivenDate(item.Casefilingdate) <= 4
+        ) {
+          let a = (cases.Severity = "Medium");
+          const result = await cases.findOneAndUpdate(
+            filter,
+            { $set: { Severity: "Medium" } },
+            {
+              upsert: true,
+              returnOriginal: false,
+            }
+          );
+        }
+        // res.status(200).json(result);
+        // } else {
+        //   let a = (cases.Severity = "Normal");
+        //   const result = await cases.updateMany(
+        //     {},
+        //     { $set: { Severity: "Normal" } },
+        //     {
+        //       upsert: true,
+        //       returnOriginal: false,
+        //     }
+        //   );
+      }
+      cases.Severity = "Normal";
+      // console.log(result);
+    }
 
-  return { months: monthsDifference, years: yearsDifference };
-}
+    // casesList.Severity = "Normal";
+    // casesList.sort((a, b) => {
+    //   const severityA = a.Severity || ""; // If Severity is undefined, consider it an empty string
+    //   const severityB = b.Severity || ""; // If Severity is undefined, consider it an empty string
 
-// Example usage:
-const dbDate = cases.Casefilingdate; // Replace this with your database date
-const dateDifference = getDateDifferenceFromDB(dbDate);
-console.log(`Months: ${dateDifference.months}, Years: ${dateDifference.years}`);
+    //   // Sort in a way that "Very High" Severity comes first
+    //   if (severityA === "Very High" && severityB !== "Very High") {
+    //     return -1; // a comes before b
+    //   } else if (severityB === "Very High" && severityA !== "Very High") {
+    //     return 1; // b comes before a
+    //   } else {
+    //     return 0; // Leave the order unchanged
+    //   }
+    // });
+    // res.status(200).json(result);
+    // console.log(casesList);
+
+    function yearsFromGivenDate(dateString) {
+      const givenDate = moment(dateString);
+      const currentDate = moment();
+      const years = currentDate.diff(givenDate, "years");
+      return years;
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
