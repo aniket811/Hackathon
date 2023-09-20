@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const casesSchema = mongoose.Schema({
-  Caseid: { type: "String", required: true },
+  Caseid: { type: "Number", required: true },
   Section: { type: "String", required: true },
   Casetype: { type: "String", required: true },
   Casefilingdate: { type: "String", required: true },
