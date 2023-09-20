@@ -1,10 +1,11 @@
 import express from "express";
 
-import { getAllCases, sortAllcases } from "../controllers/cases.js";
+import { updateCases } from "../controllers/updatecases.js";
+import { sortcases } from "../controllers/sortcases.js";
 
 const router = express.Router();
 
-router.get("/getcases", getAllCases);
-router.patch("/sortcases", sortAllcases);
+router.patch("/updateCases", updateCases);
+router.get("/sort", sortcases);
 
 export default router;
