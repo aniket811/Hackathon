@@ -17,6 +17,6 @@ export class ManagerService {
     getLoggedIn(data:any,pass:any):Observable<any>{
       const judge_id = data;
       const password = pass;
-       return this.http.post('http://localhost:5000/judges/login',{judge_id,password});
+       return this.http.post('https://hackathon-teal-nu.vercel.app/judges/login',{judge_id,password});
     }
 }
