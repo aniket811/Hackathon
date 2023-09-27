@@ -18,7 +18,6 @@ dotenv.config();
 app.get("/", (req, res) => {
   res.send("This is backend of our website.");
 });
-
 app.use("/judges", judgesroutes);
 app.use("/cases", casesroutes);
 app.use("/clerk_auth", clerkRoutes);
