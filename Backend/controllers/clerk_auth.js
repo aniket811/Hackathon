@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-// import clerk from "../models/clerk_auth.js";
+import clerk from "../models/clerk_auth.js";
 
 export const signup = async (req, res) => {
   const { judge_id, name, email, password } = req.body;
@@ -10,22 +10,22 @@ export const signup = async (req, res) => {
       return res.status(404).json({ message: "Judge already exists..." });
     }
     const hashedpassword = await bcrypt.hash(password, 12);
-    const newJudge = await judges.create({
+    const newClerk = await clerk.create({
       judge_id,
       name,
       email,
       password: hashedpassword,
-      law_type,
+      userType: "clerk",
     });
 
     const token = jwt.sign(
-      { email: newJudge.email, id: newJudge.judge_id },
+      { email: newClerk.email, id: newClerk.judge_id },
       "test",
       {
         expiresin: "1h",
       }
     );
-    res.status(200).json({ result: newJudge, token });
+    res.status(200).json({ result: newClerk, token });
     console.log(token);
   } catch (error) {
     res.status(500).json("Something went wrong");
@@ -33,9 +33,9 @@ export const signup = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-  const { judge_id, password, law } = req.body;
+  const { judge_id, password } = req.body;
   try {
-    const existinguser = await judges.findOne({ judge_id });
+    const existinguser = await clerk.findOne({ judge_id });
     if (!existinguser) {
       return res.status(404).json({ message: "Judge not found ..." });
     }
@@ -49,7 +49,7 @@ export const login = async (req, res) => {
       "test",
       { expiresIn: "3h" }
     );
-    res.status(200).json({ result: judges, token });
+    res.status(200).json({ result: existinguser, token });
   } catch (error) {
     res.status(500).json("Something went worng");
   }

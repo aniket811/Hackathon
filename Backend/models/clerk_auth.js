@@ -1,11 +1,12 @@
 import mongoose from "mongoose";
 
 const clerkSchema = mongoose.Schema({
-  judge_id: { type: String, required: true },
-  name: { type: String, required: true },
-  email: { type: String, required: true },
-  password: { type: String, required: true },
-  userType: { type: String, required: true },
+  judge_id: { type: "String", required: true },
+  name: { type: "String", required: true },
+  email: { type: "String", required: true },
+  password: { type: "String", required: true },
+  userType: { type: "String", required: true },
+  LawType: { type: "String", default: "Clerk" },
 });
 
 export default mongoose.model("clerk", clerkSchema);
