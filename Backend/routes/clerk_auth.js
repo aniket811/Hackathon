@@ -1,7 +1,4 @@
-//dont use this file now
-
 import express from "express";
-
 import { signup, login } from "../controllers/clerk_auth.js";
 import { clerks } from "../controllers/getclerks.js";
 
