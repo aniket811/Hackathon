@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-// import clerk from "../models/clerk_auth.js";
+import judges from "../models/clerk_auth.js";
 
 export const signup = async (req, res) => {
   const { judge_id, name, email, password } = req.body;
@@ -15,7 +15,7 @@ export const signup = async (req, res) => {
       name,
       email,
       password: hashedpassword,
-      law_type,
+      userType,
     });
 
     const token = jwt.sign(
