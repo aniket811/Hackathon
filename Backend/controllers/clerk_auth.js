@@ -33,7 +33,7 @@ export const signup = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-  const { judge_id, password, law } = req.body;
+  const { judge_id, password } = req.body;
   try {
     const existinguser = await judges.findOne({ judge_id });
     if (!existinguser) {
