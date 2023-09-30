@@ -5,6 +5,7 @@ import { sortcases } from "../controllers/sortcases.js";
 
 const router = express.Router();
 
+router.post("/addcases");
 router.patch("/updateCases", updateCases);
 router.get("/sort", sortcases);
 
