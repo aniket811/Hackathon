@@ -1,11 +1,11 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-// import clerk from "../models/clerk_auth.js";
+import judges from "../models/clerk_auth.js";
 
 export const signup = async (req, res) => {
   const { judge_id, name, email, password } = req.body;
   try {
-    const existinguser = await clerk.findOne({ email });
+    const existinguser = await judges.findOne({ email });
     if (existinguser) {
       return res.status(404).json({ message: "Judge already exists..." });
     }
@@ -15,7 +15,7 @@ export const signup = async (req, res) => {
       name,
       email,
       password: hashedpassword,
-      law_type,
+      userType,
     });
 
     const token = jwt.sign(
@@ -33,7 +33,7 @@ export const signup = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-  const { judge_id, password, law } = req.body;
+  const { judge_id, password } = req.body;
   try {
     const existinguser = await judges.findOne({ judge_id });
     if (!existinguser) {
