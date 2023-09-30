@@ -5,7 +5,7 @@ import judges from "../models/clerk_auth.js";
 export const signup = async (req, res) => {
   const { judge_id, name, email, password } = req.body;
   try {
-    const existinguser = await clerk.findOne({ email });
+    const existinguser = await judges.findOne({ email });
     if (existinguser) {
       return res.status(404).json({ message: "Judge already exists..." });
     }
