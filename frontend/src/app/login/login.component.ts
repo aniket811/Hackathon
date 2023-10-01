@@ -29,16 +29,16 @@ export class LoginComponent {
 
           this.userService.isAdminLoggedIn.next(true);
           this.toast.success('Admin Logged In');
-        } else if (res.result.userType == 'judge') {
+        } else if (res.result.userType == 'Judge') {
           this.dialog.closeAll();
           this.userService.isUserLoggedIn.next(true);
           this.toast.success('Judge Logged In');
         } else if (res.result.userType == 'Clerk') {
           this.dialog.closeAll();
-          this.userService.isUserLoggedIn.next(true);
-          this.toast.success('User Logged In');
+          this.userService.isClerkLoggedIn.next(true);
+          this.toast.success('Clerk Logged In');
         }
-
+        this.userService.userInformation.next(res.result);
         this.router.navigate(['/admin']);
       },
       (err: any) => {

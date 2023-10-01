@@ -7,9 +7,8 @@ export class authGuard implements CanActivate {
 
   constructor(private managerService: ManagerService, private router: Router) { }
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    if(this.managerService.isAdminLoggedIn.value||this.managerService.isUserLoggedIn.value){
+    if(this.managerService.isAdminLoggedIn.value||this.managerService.isUserLoggedIn.value||this.managerService.isClerkLoggedIn.value){
       return true;
-      
     }
     this.router.navigate(['/']);
     return false;

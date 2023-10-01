@@ -12,6 +12,7 @@ export class NavbarComponent {
   isAdminLoggedIn:boolean=false;
   isUserLoggedIn:boolean=false;
   isClerkLoggedIn:boolean=false;
+  userName:any="";
   constructor(private dialog:MatDialog,private manager:ManagerService,private toast:ToastrService) {
     this.manager.isAdminLoggedIn.subscribe((data)=>{
       this.isAdminLoggedIn=data;
@@ -22,21 +23,27 @@ export class NavbarComponent {
     this.manager.isClerkLoggedIn.subscribe((data)=>{
       this.isUserLoggedIn=data;
     })
+    this.manager.userInformation.subscribe((data)=>{
+      this.userName=data.name
+    })
   }
   getUserLoggedIn(){
     this.dialog.open(LoginComponent, {
-      width: '40rem',
+      width: '40rem'
+    
     });
   }
   getLoginState():boolean{
     if(this.isAdminLoggedIn || this.isUserLoggedIn || this.isClerkLoggedIn){
       return false;
     }
+
     return true;
   }
   getAdminLoggedOut(){
     // this.manager.isAdminLoggedIn.next(false);
     this.toast.success("Admin Logged Out");    
+    
     window.location.reload();
   }
   getUserLoggedOut(){

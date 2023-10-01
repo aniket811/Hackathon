@@ -1,13 +1,13 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import judges from "../models/clerk_auth.js";
+import judges from "../models/auth.js";
 
 export const signup = async (req, res) => {
   const { judge_id, name, email, password } = req.body;
   try {
     const existinguser = await judges.findOne({ email });
     if (existinguser) {
-      return res.status(404).json({ message: "Judge already exists..." });
+      return res.status(404).json({ message: "Clerk already exists..." });
     }
     const hashedpassword = await bcrypt.hash(password, 12);
     const newJudge = await judges.create({
@@ -17,7 +17,6 @@ export const signup = async (req, res) => {
       password: hashedpassword,
       userType,
     });
-
     const token = jwt.sign(
       { email: newJudge.email, id: newJudge.judge_id },
       "test",
@@ -37,7 +36,7 @@ export const login = async (req, res) => {
   try {
     const existinguser = await judges.findOne({ judge_id });
     if (!existinguser) {
-      return res.status(404).json({ message: "Judge not found ..." });
+      return res.status(404).json({ message: "Clerk not found ..." });
     }
     const isPasswordcrt = await bcrypt.compare(password, existinguser.password);
     if (!isPasswordcrt) {
