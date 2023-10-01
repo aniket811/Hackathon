@@ -9,6 +9,7 @@ export class ManagerService {
   public isUserLoggedIn =new BehaviorSubject<boolean>(false);
   public isAdminLoggedIn =new BehaviorSubject<boolean>(false);
   public isClerkLoggedIn =new BehaviorSubject<boolean>(false);
+  public userInformation=new BehaviorSubject<any>(null);
     private casesdata = casesdata;
     constructor(private http:HttpClient) { }
     getCasesData(){ 
@@ -17,6 +18,12 @@ export class ManagerService {
     getLoggedIn(data:any,pass:any):Observable<any>{
       const judge_id = data;
       const password = pass;
-       return this.http.post('https://hackathon-teal-nu.vercel.app/judges/login',{judge_id,password});
+       return this.http.post('http://localhost:5000/judges/login',{judge_id,password});
+    }
+    RegisterClerk(data:any):Observable<any>{
+      return this.http.post('http://localhost:5000/judges/signup',data); 
+    }
+    getAllClerks():Observable<any>{
+      return this.http.get('http://localhost:5000/clerk_auth/getallClerk');  
     }
 }

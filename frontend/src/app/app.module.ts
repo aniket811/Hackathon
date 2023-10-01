@@ -5,7 +5,7 @@ import { LandingsiteComponent } from './landingsite/landingsite.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
 
-import { RegisterComponent } from './register/register.component';
+
 import { FormsModule } from '@angular/forms';
 import { ManagerService } from 'src/services/manager.service';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -17,16 +17,21 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { ToastrModule, ToastrService, provideToastr } from 'ngx-toastr';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
-
+import { AddclerkComponent } from './addclerk/addclerk.component';
+import { AddjudgeComponent } from './addjudge/addjudge.component';
+import { MatTableModule } from '@angular/material/table';
+import {MatFormFieldModule} from '@angular/material/form-field';
 @NgModule({
   declarations: [
     AppComponent,
     LandingsiteComponent,
     NavbarComponent,
     LoginComponent,
-    RegisterComponent,
+    // RegisterComponent,
     AdminComponent,
-    SidebarComponent
+    SidebarComponent,
+    AddclerkComponent,
+    AddjudgeComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +41,9 @@ import { MatButtonModule } from '@angular/material/button';
     BrowserAnimationsModule,
     MatDialogModule,
     ToastrModule.forRoot(),
-    MatButtonModule
+    MatButtonModule,
+    MatFormFieldModule,
+    MatTableModule
   ],
   providers: [ManagerService,authGuard, provideAnimations(), // required animations providers
   provideToastr(),ToastrService,HttpClient],

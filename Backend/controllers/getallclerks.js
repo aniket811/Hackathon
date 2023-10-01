@@ -1,8 +1,9 @@
-import clerk from "../models/clerk_auth.js";
+import authType from "../models/auth.js";
 
-export const clerks = async () => {
+
+export const clerks = async (req,res) => {
   try {
-    const getallClerks = await clerk.find();
+    const getallClerks = await authType.find({userType:"Clerk"});
     res.status(200).json(getallClerks);
   } catch (error) {
     res.status(400).json("invalid request");
