@@ -18,12 +18,12 @@ export class ManagerService {
     getLoggedIn(data:any,pass:any):Observable<any>{
       const judge_id = data;
       const password = pass;
-       return this.http.post('http://localhost:5000/judges/login',{judge_id,password});
+       return this.http.post('https://hackathon-teal-nu.vercel.app/judges/login',{judge_id,password});
     }
     RegisterClerk(data:any):Observable<any>{
-      return this.http.post('http://localhost:5000/judges/signup',data); 
+      return this.http.post('https://hackathon-teal-nu.vercel.app/judges/signup',data); 
     }
     getAllClerks():Observable<any>{
-      return this.http.get('http://localhost:5000/clerk_auth/getallClerk');  
+      return this.http.get('https://hackathon-teal-nu.vercel.app/clerk_auth/getallClerk');  
     }
 }
