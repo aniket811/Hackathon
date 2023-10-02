@@ -20,10 +20,13 @@ export class LoginComponent {
   getUserLoggedIn(data: any) {
     let judge_id = data.judgeID;
     let password = data.password;
+    
     this.userService.getLoggedIn(judge_id, password).subscribe(
       (res: any) => {
-        sessionStorage.setItem('user', res.result.judge_id);
-        sessionStorage.setItem('userpassword', res.result.password);
+        var user = JSON.stringify(res.result);
+        console.log(user);
+        
+
         if (res.result.userType == 'Admin') {
           this.dialog.closeAll();
 
@@ -46,4 +49,5 @@ export class LoginComponent {
       }
     );
   }
+ 
 }

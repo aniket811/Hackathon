@@ -21,6 +21,8 @@ import { AddclerkComponent } from './addclerk/addclerk.component';
 import { AddjudgeComponent } from './addjudge/addjudge.component';
 import { MatTableModule } from '@angular/material/table';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { AddcasesComponent } from './addcases/addcases.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +33,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     AdminComponent,
     SidebarComponent,
     AddclerkComponent,
-    AddjudgeComponent
+    AddjudgeComponent,
+    AddcasesComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     ToastrModule.forRoot(),
     MatButtonModule,
     MatFormFieldModule,
-    MatTableModule
+    MatTableModule,
+    MatPaginatorModule
   ],
   providers: [ManagerService,authGuard, provideAnimations(), // required animations providers
   provideToastr(),ToastrService,HttpClient],

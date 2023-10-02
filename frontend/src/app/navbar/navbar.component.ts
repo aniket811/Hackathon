@@ -43,15 +43,17 @@ export class NavbarComponent {
   getAdminLoggedOut(){
     // this.manager.isAdminLoggedIn.next(false);
     this.toast.success("Admin Logged Out");    
-    
+    sessionStorage.clear();
     window.location.reload();
   }
   getUserLoggedOut(){
+    sessionStorage.clear();
     // this.manager.isUserLogg/edIn.next(false);
     window.location.reload();
     this.toast.success("Judge Logged Out Successfull");    
   }
   getClerkLoggedOut(){
+    sessionStorage.clear();
     // this.manager.isClerkLoggedIn.next(false);
     this.toast.success("Clerk Logged Out");    
     window.location.reload();
