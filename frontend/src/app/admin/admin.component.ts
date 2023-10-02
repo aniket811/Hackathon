@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ManagerService } from 'src/services/manager.service';
 import { AddclerkComponent } from '../addclerk/addclerk.component';
 import { AddjudgeComponent } from '../addjudge/addjudge.component';
 import { identifierName } from '@angular/compiler';
+import { MatPaginator } from '@angular/material/paginator';
+import {ViewChild} from '@angular/core'
+import { AddcasesComponent } from '../addcases/addcases.component';
+import { MatTableDataSource } from '@angular/material/table';
 // import { casesapi } from 'src/models/casesapi';
 export interface Clerks{
   judge_id:string;
@@ -15,7 +19,7 @@ export interface Clerks{
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css', '../../assets/css/tailwind.output.css'],
 })
-export class AdminComponent implements OnInit {
+export class AdminComponent implements OnInit,AfterViewInit {
   cases: any;
   isUserLoggedIn: boolean = false;
   isClerkLoggedIn: boolean = false;
@@ -24,9 +28,10 @@ export class AdminComponent implements OnInit {
   casesLength: any;
   clerks:Clerks[]=[];
   isViewClerk:boolean=false;
-  dataSource=this.clerks;
+  clerkdataSource=new MatTableDataSource<Clerks>;
   viewCasesText: string = 'View Clerks';
-  displayedColumns: string[] = ['name', 'email', 'judge_id']; 
+  displayedColumns: string[] = ['name', 'email', 'judge_id'];
+  @ViewChild(MatPaginator)paginator!: MatPaginator;
   constructor(private casesApi: ManagerService,private dialog:MatDialog) {
     this.casesApi.isUserLoggedIn.subscribe((data) => {
       this.isUserLoggedIn = data;
@@ -40,8 +45,11 @@ export class AdminComponent implements OnInit {
   }
   ngOnInit(): void {
     this.cases = this.casesApi.getCasesData();
-
     this.casesLength = this.casesApi.getCasesData().length;
+    this.clerkdataSource=new MatTableDataSource(this.clerks);
+    this.clerkdataSource.paginator=this.paginator;
+  }
+  ngAfterViewInit(): void {
   }
   AddClerkPopUp(){
     this.dialog.open(AddclerkComponent,{
@@ -66,5 +74,10 @@ export class AdminComponent implements OnInit {
     this.casesApi.getAllClerks().subscribe((data)=>{  
         this.clerks=data;
     })
+  }
+  AddCasesPopup(){
+    this.dialog.open(AddcasesComponent,{
+      width:'40rem'
+    });
   }
 }
