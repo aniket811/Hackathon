@@ -24,7 +24,7 @@ export class LoginComponent {
     this.userService.getLoggedIn(judge_id, password).subscribe(
       (res: any) => {
         var user = JSON.stringify(res.result);
-        console.log(user);
+        sessionStorage.setItem('user', user);
         
 
         if (res.result.userType == 'Admin') {
