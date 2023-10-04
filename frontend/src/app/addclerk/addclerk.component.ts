@@ -19,6 +19,9 @@ getAddClerk(data:any){
   this.clerkService.RegisterClerk(data).subscribe((res:any)=>{
     this.toast.success("Clerk Added Successfully"); 
     this.dialog.closeAll();
+  },(err:any)=>{
+    console.log(err);
+    this.toast.error(err);
   })
 } 
 }

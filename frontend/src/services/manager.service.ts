@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { casesdata } from '../models/casesapi';
+import { Clerks } from 'src/app/admin/admin.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -23,7 +24,10 @@ export class ManagerService {
     RegisterClerk(data:any):Observable<any>{
       return this.http.post('https://hackathon-teal-nu.vercel.app/judges/signup',data); 
     }
-    getAllClerks():Observable<any>{
-      return this.http.get('https://hackathon-teal-nu.vercel.app/clerk_auth/getallClerk');  
+    getAllClerks():Observable<any[]>{
+      return this.http.get<any[]>('https://hackathon-teal-nu.vercel.app/clerk_auth/getallClerk');  
+    }
+    AddCase(data:any):Observable<any>{  
+      return this.http.post<any>('http://localhost:5000/cases/addcases',data);
     }
 }

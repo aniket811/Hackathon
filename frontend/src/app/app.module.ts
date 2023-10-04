@@ -23,6 +23,8 @@ import { MatTableModule } from '@angular/material/table';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { AddcasesComponent } from './addcases/addcases.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { MatSelectModule } from '@angular/material/select';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +49,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatButtonModule,
     MatFormFieldModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    NgxPaginationModule,
+    MatSelectModule
   ],
   providers: [ManagerService,authGuard, provideAnimations(), // required animations providers
   provideToastr(),ToastrService,HttpClient],
