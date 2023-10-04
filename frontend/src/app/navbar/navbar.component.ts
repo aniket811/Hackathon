@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from '../login/login.component';
 import { ManagerService } from 'src/services/manager.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -13,7 +14,7 @@ export class NavbarComponent {
   isUserLoggedIn:boolean=false;
   isClerkLoggedIn:boolean=false;
   userName:any="";
-  constructor(private dialog:MatDialog,private manager:ManagerService,private toast:ToastrService) {
+  constructor(private dialog:MatDialog,private manager:ManagerService,private toast:ToastrService,private router:Router) {
     this.manager.isAdminLoggedIn.subscribe((data)=>{
       this.isAdminLoggedIn=data;
     })
@@ -40,22 +41,21 @@ export class NavbarComponent {
 
     return true;
   }
-  getAdminLoggedOut(){
-    // this.manager.isAdminLoggedIn.next(false);
-    this.toast.success("Admin Logged Out");    
-    sessionStorage.clear();
-    window.location.reload();
-  }
+ 
   getUserLoggedOut(){
-    sessionStorage.clear();
+    let user=JSON.parse(sessionStorage.getItem('user')!);
     // this.manager.isUserLogg/edIn.next(false);
-    window.location.reload();
-    this.toast.success("Judge Logged Out Successfull");    
-  }
-  getClerkLoggedOut(){
+    this.toast.error("Logged out as an "+user.name); 
     sessionStorage.clear();
-    // this.manager.isClerkLoggedIn.next(false);
-    this.toast.success("Clerk Logged Out");    
-    window.location.reload();
+    if(this.manager.isUserLoggedIn.value){
+      this.manager.isUserLoggedIn.next(false);
+    }
+    else if(this.manager.isAdminLoggedIn.value){
+      this.manager.isAdminLoggedIn.next(false);
+    }
+    else if(this.manager.isClerkLoggedIn.value){
+      this.manager.isClerkLoggedIn.next(false);
+    }
+    this.router.navigate(['/']);
   }
 }
