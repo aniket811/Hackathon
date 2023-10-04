@@ -42,15 +42,8 @@
             >Login</a
           >
 
-          <a class="btn" *ngIf="isAdminLoggedIn" (click)="getAdminLoggedOut()"
-            >Log Out as an {{userName}}
-          </a>
-
-          <a class="btn" *ngIf="isClerkLoggedIn" (click)="getClerkLoggedOut()"
-            >Log Out as an {{userName}}</a
-          >
-
-          <a class="btn" *ngIf="isUserLoggedIn" (click)="getUserLoggedOut()"
+         
+          <a class="btn" *ngIf="isUserLoggedIn||isAdminLoggedIn||isClerkLoggedIn" (click)="getUserLoggedOut()"
             >Log Out as an {{userName}}</a
           >
         </div>
