@@ -9,6 +9,8 @@ import {ViewChild} from '@angular/core'
 import { AddcasesComponent } from '../addcases/addcases.component';
 import { MatTableDataSource } from '@angular/material/table';
 // import { casesapi } from 'src/models/casesapi';
+
+// import {  ChangeDetectorRef } from '@angular/core';
 export interface Clerks{
   judge_id:string;
   name:string;
@@ -28,10 +30,10 @@ export class AdminComponent implements OnInit,AfterViewInit {
   casesLength: any;
   clerks:Clerks[]=[];
   isViewClerk:boolean=false;
-  clerkdataSource=new MatTableDataSource<Clerks>;
   viewCasesText: string = 'View Clerks';
   displayedColumns: string[] = ['name', 'email', 'judge_id'];
-  @ViewChild(MatPaginator)paginator!: MatPaginator;
+  dataSource = new MatTableDataSource<any[]>(); 
+  @ViewChild('paginator',{static:true}) paginator: MatPaginator;
   constructor(private casesApi: ManagerService,private dialog:MatDialog) {
     this.casesApi.isUserLoggedIn.subscribe((data) => {
       this.isUserLoggedIn = data;
@@ -46,11 +48,13 @@ export class AdminComponent implements OnInit,AfterViewInit {
   ngOnInit(): void {
     this.cases = this.casesApi.getCasesData();
     this.casesLength = this.casesApi.getCasesData().length;
-    this.clerkdataSource=new MatTableDataSource(this.clerks);
-    this.clerkdataSource.paginator=this.paginator;
+    this.casesApi.getAllClerks().subscribe((data:any[])=>{ 
+      this.dataSource.data=data;
+    })
   }
   ngAfterViewInit(): void {
-  }
+   this.dataSource.paginator = this.paginator;
+  } 
   AddClerkPopUp(){
     this.dialog.open(AddclerkComponent,{
       width:'40rem'

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { ManagerService } from 'src/services/manager.service';
 
 @Component({
   selector: 'app-addcases',
@@ -7,6 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddcasesComponent implements OnInit{
   caseId:number=0;
+  constructor(private userManager:ManagerService,private toast:ToastrService) {
+
+   }
   ngOnInit(): void {
     this.generateRandomNumbers()
     
@@ -14,6 +19,12 @@ export class AddcasesComponent implements OnInit{
   getAddCases(data:any){
     let caseFilingDate=String(data.Casefilingdate);
     data.Casefilingdate=caseFilingDate;
+    this.userManager.AddCase(data).subscribe((res:any)=>{
+      this.toast.success("Case Added Successfully");
+    },(err:any)=>{
+      console.log(err);
+      this.toast.error("Something went wrong please try again later");
+    })
   } 
   generateRandomNumbers():number {
 

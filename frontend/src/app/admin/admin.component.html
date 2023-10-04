@@ -7,7 +7,7 @@
     <!-- Cards -->
     <table>
 
-      <tr class="m-1">
+      <tr class="m-2 p-3">
 
         
         <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
@@ -27,7 +27,7 @@
           </div>
 
 
-          <div *ngIf="isClerkLoggedIn">
+          <div *ngIf="isAdminLoggedIn">
             <div class="col">
               <div style="width: 20rem;">
                 <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800" id="addClerk">
@@ -91,10 +91,24 @@
 
   <!-- Card -->
 
-
   <div *ngIf="!isViewClerk">
 
-
+    <div class="container">
+      <div class="ml-4">
+      
+        <mat-form-field>
+          <mat-label>Select Case Type</mat-label>
+          <mat-select>
+            <mat-option value="Criminal">
+              Criminal 
+            </mat-option>
+            <mat-option value="Civil">
+              Civil
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      </div>
     <!-- New Table -->
     <div class="w-full overflow-hidden rounded-lg shadow-xs">
       <div class="w-full overflow-x-auto">
@@ -192,7 +206,7 @@
   </div>
 
   <div *ngIf="isViewClerk">
-    <mat-table  [dataSource]="clerkdataSource" class="table">
+    <mat-table  [dataSource]="dataSource" class="table">
       <!-- Position Column -->
       <ng-container matColumnDef="judge_id">
         <th mat-header-cell *matHeaderCellDef> Clerk Id</th>
@@ -214,7 +228,7 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </mat-table>
-    <mat-paginator #paginator pageSize="5" [pageSizeOptions]="[5,10,20]"  showFirstLastButtons></mat-paginator>
+    <mat-paginator  #paginator  [pageSize]="5" [pageSizeOptions]="[5,10,20]"  showFirstLastButtons></mat-paginator>
 
   </div>
 </main>
