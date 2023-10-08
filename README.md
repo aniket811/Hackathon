@@ -22,4 +22,3 @@ Explore the power of DCM and revolutionize how cases are managed, making the leg
 
 ---
 
-Feel free to tailor and modify this description to better align with your project and its goals.
