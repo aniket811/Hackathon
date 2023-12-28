@@ -28,7 +28,6 @@ export const updateCases = async (req, res) => {
         { $set: { Severity: severity } },
         { upsert: true, returnOriginal: false }
       );
-      console.log("Severity updated successfully.");
       res.status(200).json({ message: "Severity updated successfully." });
     }
     function yearsFromGivenDate(dateString) {

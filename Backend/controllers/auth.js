@@ -23,10 +23,8 @@ export const signup = async (req, res) => {
       "test"
     );
     res.status(200).json({ result: newJudge, token });
-    // console.log(token);
   } catch (error) {
-    // res.status(500).json(error);
-    console.log(error);
+  
   }
 };
 
@@ -46,7 +44,6 @@ export const login = async (req, res) => {
       { email: judges.email, id: existinguser.judge_id },
       "test"
     );
-    console.log("Hit Received");
     res.status(200).json({ result: existinguser, token });
   } catch (error) {
     res.status(500).json("Something went wrong");

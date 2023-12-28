@@ -25,13 +25,13 @@ export const signup = async (req, res) => {
       }
     );
     res.status(200).json({ result: newJudge, token });
-    console.log(token);
   } catch (error) {
     res.status(500).json("Something went wrong");
   }
 };
 
 export const login = async (req, res) => {
+  
   const { judge_id, password } = req.body;
   try {
     const existinguser = await judges.findOne({ judge_id });
