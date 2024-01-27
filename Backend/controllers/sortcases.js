@@ -1,22 +1,61 @@
+// import cases from "../models/cases.js";
+// import { Mongoose } from "mongoose";
+// const mongoose = Mongoose.mongoose;
+// export const sortcases = async (req, res) => {
+//   try{
+//   let  severity  = req.body.severity;   
+//   console.log(severity);
+//   const sortcases = await cases.find({ Severity: severity });
+//   if(sortcases.length === 0) { 
+//     //if no cases found other than the given severity then return all cases
+//       const otherCases=await cases.find({});
+//       return res.status(200).json(otherCases);
+//     };
+//   return res.status(200).json(sortcases);
+// }
+// catch(error){
+  
+//   return res.status(404).json({message: error.message})
+// }
+// };
+
 import cases from "../models/cases.js";
 import { Mongoose } from "mongoose";
 const mongoose = Mongoose.mongoose;
+
 export const sortcases = async (req, res) => {
-  try{
-    // object property destructuring 
-  let  severity  = req.body.severity;   
-  severity=severity.toLowerCase();
-  const sortcases = await cases.find({ Severity: severity });
-  console.log(severity);
-  if(sortcases.length === 0) return res.status(404).json({message: " Sorry ! No cases found"});
-  
-  return res.status(200).json(sortcases);
-}
-catch(error){
-  
-  return res.status(404).json({message: error.message})
-}
+  try {
+    let severity = req.body.severity;
+    let page = req.query.page || 1;
+    let pageSize = req.query.pageSize || 5; // You can adjust the default page size
+
+    console.log(severity);
+
+    const options = {
+      page: parseInt(page),
+      limit: parseInt(pageSize),
+    };
+
+    let query = { Severity: severity };
+
+    if (!severity) {
+      query = {}; // If no severity specified, retrieve all cases
+    }
+
+    const sortcases = await cases.paginate(query, options);
+
+    if (sortcases.docs.length === 0) {
+      // If no cases found for the given severity or all cases, return all cases
+      const otherCases = await cases.paginate({}, options);
+      return res.status(200).json(otherCases);
+    }
+
+    return res.status(200).json(sortcases);
+  } catch (error) {
+    return res.status(404).json({ message: error.message });
+  }
 };
+
 
 
 

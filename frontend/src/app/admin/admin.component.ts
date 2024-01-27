@@ -8,7 +8,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import {ViewChild} from '@angular/core'
 import { AddcasesComponent } from '../addcases/addcases.component';
 import { MatTableDataSource } from '@angular/material/table';
-// import { casesapi } from 'src/models/casesapi';
 
 // import {  ChangeDetectorRef } from '@angular/core';
 export interface Clerks{
@@ -21,7 +20,7 @@ export interface Clerks{
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css', '../../assets/css/tailwind.output.css'],
 })
-export class AdminComponent implements OnInit,AfterViewInit {
+export class AdminComponent implements OnInit,AfterViewInit { 
   cases: any;
   isUserLoggedIn: boolean = false;
   isClerkLoggedIn: boolean = false;
@@ -33,7 +32,7 @@ export class AdminComponent implements OnInit,AfterViewInit {
   viewCasesText: string = 'View Clerks';
   displayedColumns: string[] = ['name', 'email', 'judge_id'];
   dataSource = new MatTableDataSource<any[]>(); 
-  @ViewChild('paginator',{static:true}) paginator: MatPaginator;
+  @ViewChild('paginator',{static:true}) paginator!: MatPaginator;
   constructor(private casesApi: ManagerService,private dialog:MatDialog) {
     this.casesApi.isUserLoggedIn.subscribe((data) => {
       this.isUserLoggedIn = data;
@@ -46,8 +45,14 @@ export class AdminComponent implements OnInit,AfterViewInit {
     });
   }
   ngOnInit(): void {
-    this.cases = this.casesApi.getCasesData();
-    this.casesLength = this.casesApi.getCasesData().length;
+     this.casesApi.getCasesData("very high").subscribe((data:any)=>{
+      this.cases = data;
+      console.log(data);
+      //FIX : Error in console
+
+      
+      this.casesLength = this.cases.length;  
+    });
     this.casesApi.getAllClerks().subscribe((data:any[])=>{ 
       this.dataSource.data=data;
     })

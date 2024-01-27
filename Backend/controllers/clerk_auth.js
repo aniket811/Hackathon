@@ -50,6 +50,6 @@ export const login = async (req, res) => {
     );
     res.status(200).json({ result: judges, token });
   } catch (error) {
-    res.status(500).json("Something went worng");
+    res.status(500).json({message:"Something went wrong"});
   }
 };
