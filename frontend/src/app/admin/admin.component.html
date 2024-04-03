@@ -150,21 +150,21 @@
                 {{ case.Section }}
               </td>
               <td class="px-4 py-3 text-xs">
-                <span *ngIf="case.Severity == 'Very High'"
-                  class="px-2 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 rounded-full dark:text-white dark:bg-orange-600">
+                <span *ngIf="case.Severity == 'Very High'||case.Severity=='very high'"
+                  class="px-2 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 rounded-full dark:text-white dark:bg-orange-600 ">
                   {{ case.Severity }}
                 </span>
-                <span *ngIf="case.Severity == 'Medium'"
-                  class="px-2 py-1 font-semibold leading-tight text-yellow-700 bg-yellow-100 rounded-full dark:text-white dark:bg-yellow-600">
+                <span *ngIf="case.Severity == 'Medium'||case.Severity=='medium'"
+                  class="px-2 py-1 font-semibold leading-tight text-yellow-700 bg-yellow-100 rounded-full dark:text-white dark:bg-yellow-600 bg-warning text-dark">
                   {{ case.Severity }}
                 </span>
-                <span *ngIf="case.Severity == 'Low'"
-                  class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:text-white dark:bg-green-600">
+                <span *ngIf="case.Severity == 'Low'||case.Severity=='normal'"
+                  class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:text-white dark:bg-green-600 bg-success text-dark">
                   {{ case.Severity }}
                 </span>
               </td>
               <td class="px-4 py-3 text-sm">
-                {{ case.CaseFilingdate }}
+                {{ case.Casefilingdate }}
               </td>
             </tr>
           </tbody>

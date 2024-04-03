@@ -25,6 +25,7 @@ export class AdminComponent implements OnInit,AfterViewInit {
   isUserLoggedIn: boolean = false;
   isClerkLoggedIn: boolean = false;
   isAdminLoggedIn: boolean = false;
+  dafaultSeverity="very high";
   casesLengths: any[] = [];
   casesLength: any;
   clerks:Clerks[]=[];
@@ -45,8 +46,10 @@ export class AdminComponent implements OnInit,AfterViewInit {
     });
   }
   ngOnInit(): void {
-     this.casesApi.getCasesData("very high").subscribe((data:any)=>{
-      this.cases = data;
+     this.casesApi.getCasesData(this.dafaultSeverity).subscribe((data:any)=>{
+      debugger;
+
+      this.cases = data.docs;
       console.log(data);
       //FIX : Error in console
 

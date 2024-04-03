@@ -15,7 +15,7 @@ export class ManagerService {
     private casesdata = casesdata;
     constructor(private http:HttpClient) { }
     getCasesData(severity:any):Observable<any>{ 
-      return this.http.get<any>(`${environment.apiUrl}/cases/sortcases`,severity);
+      return this.http.get<any>(`${environment.apiUrl}/cases/sortcases?Severity=${severity}`);
     }
     getLoggedIn(data:any,pass:any):Observable<any>{
       const judge_id = data;

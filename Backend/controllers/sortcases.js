@@ -25,7 +25,8 @@ const mongoose = Mongoose.mongoose;
 
 export const sortcases = async (req, res) => {
   try {
-    let severity = req.body.severity;
+    let severity = req.query.Severity
+  
     let page = req.query.page || 1;
     let pageSize = req.query.pageSize || 5; // You can adjust the default page size
 
@@ -44,13 +45,15 @@ export const sortcases = async (req, res) => {
 
     const sortcases = await cases.paginate(query, options);
 
-    if (sortcases.docs.length === 0) {
+    if (sortcases.docs.length == 0) {
       // If no cases found for the given severity or all cases, return all cases
       const otherCases = await cases.paginate({}, options);
+      console.log()
       return res.status(200).json(otherCases);
     }
-
+    console.log('Return only high priority cases ')
     return res.status(200).json(sortcases);
+  
   } catch (error) {
     return res.status(404).json({ message: error.message });
   }
