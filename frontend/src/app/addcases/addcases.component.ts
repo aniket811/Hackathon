@@ -19,6 +19,7 @@ export class AddcasesComponent implements OnInit{
   getAddCases(data:any){
     let caseFilingDate=String(data.Casefilingdate);
     data.Casefilingdate=caseFilingDate;
+    data.Caseid=this.caseId
     this.userManager.AddCase(data).subscribe((res:any)=>{
       this.toast.success("Case Added Successfully");
     },(err:any)=>{
