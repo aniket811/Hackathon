@@ -60,5 +60,12 @@ export const sortcases = async (req, res) => {
 };
 
 
+export const searchById = async (req, res) => {
+  const { Caseid } = req.body;
+  const searchByCaseId = await cases.find({ Caseid: Caseid });
+  res.status(200).json(searchByCaseId);
+};
+
+
 
 
