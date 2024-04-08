@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+import mongoosePaginate from 'mongoose-paginate-v2';
 const casesSchema = mongoose.Schema({
   Caseid: { type: "Number", required: true, unique: true },
   Section: { type: "String", required: true },
@@ -12,4 +12,5 @@ const casesSchema = mongoose.Schema({
   LawType: { type: "String", required: true },
 });
 
+casesSchema.plugin(mongoosePaginate)
 export default mongoose.model("cases", casesSchema);

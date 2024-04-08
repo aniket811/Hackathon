@@ -23,10 +23,8 @@ export const signup = async (req, res) => {
       "test"
     );
     res.status(200).json({ result: newJudge, token });
-    // console.log(token);
   } catch (error) {
-    // res.status(500).json(error);
-    console.log(error);
+  
   }
 };
 
@@ -35,7 +33,7 @@ export const login = async (req, res) => {
   try {
     const existinguser = await judges.findOne({ judge_id });
     if (!existinguser) {
-      return res.status().json({ message: "Judge not found ..." });
+      return res.status(400).json({ message: "Judge not found ..." });
     }
     const isPasswordcrt = await bcrypt.compare(password, existinguser.password);
     if (!isPasswordcrt) {
@@ -46,9 +44,9 @@ export const login = async (req, res) => {
       { email: judges.email, id: existinguser.judge_id },
       "test"
     );
-    console.log("Hit Received");
     res.status(200).json({ result: existinguser, token });
   } catch (error) {
-    res.status(500).json("Something went wrong");
+    console.log(error)
+    res.status(500).json({ message: errors });
   }
 };
